@@ -1,6 +1,40 @@
 body{
     margin:  0;
-    background: pink;
+    color: white;
+    background: linear-gradient(to right, #424242, #242424);
     /*text-align: center;*/
 }
+[style*="BottomPage"]{
+    /*color:  blue;*/
+    position: fixed;
+    bottom: 0;
+}
+div[style*="div::BottomPage"]{
+    /*color:  blue;*/
+    position: fixed;
+    bottom: 0;
+}
 
+[style*="indent"]{
+    text-indent: 40px;
+}
+
+/* unvisited link */
+a:link {
+  color: sandybrown;
+}
+
+/* visited link */
+a:visited {
+  color: sandybrown;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+/*a:active {
+  color: black;
+} */
