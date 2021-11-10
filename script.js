@@ -1,4 +1,4 @@
-console.log("It's working");
+console.log("GET THE FUCK OUT OF THE CONSOLE :)");
 let a = 0;
 
 function sleep(sleepDuration){
@@ -14,11 +14,10 @@ console.log("salut");
 //     if (a > 100) {
 //         break;
 //     }
-    
 // }
 
 function CustomFunc() {
     console.log("salut");
-    // let obj = document.getElementById("title");
-    document.body.style.background = "red"
+    let obj = document.getElementById("title");
+    obj.style.color = "red";
 }
