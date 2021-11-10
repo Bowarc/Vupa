@@ -4,6 +4,10 @@ body{
     background: linear-gradient(to right, #424242, #242424);
     /*text-align: center;*/
 }
+/*body {
+    background: black;
+}*/
+
 
 div[style*="title"]{
     text-align: center;
@@ -43,3 +47,14 @@ a:hover {
 /*a:active {
   color: black;
 } */
+
+.clock {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    /*transform: translateX(-50%) translateY(-50%);*/
+    color: #E9A734;
+    font-size: 15px;
+    font-family: Orbitron;
+    letter-spacing: 2px;
+}
