@@ -4,6 +4,11 @@ body{
     background: linear-gradient(to right, #424242, #242424);
     /*text-align: center;*/
 }
+
+div[style*="title"]{
+    text-align: center;
+    color: #E9A734;
+}
 [style*="BottomPage"]{
     /*color:  blue;*/
     position: fixed;
