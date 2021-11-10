@@ -49,10 +49,5 @@ function showTime(){
     setTimeout(showTime, 1000);
     
 }
-function CrashBrowser(){
-    for (i = 0;  i < 1000000; i++){
-        console.log(i**3)
-    }
-}
 
 showTime();
