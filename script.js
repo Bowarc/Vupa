@@ -43,7 +43,7 @@ function timeSince(date) {
     if (interval > 1) {
         return add_pluriel(Math.floor(interval), "minute")
     }
-    return "Less than 1 minute ago"
+    return "Less than 5 minute ago"
     // return add_pluriel(Math.floor(interval), "second")
 }
 
@@ -86,7 +86,7 @@ function showLastUpdateTime(StartupTime){
     // console.log(fetch("https://api.github.com/repos/bowarc/Vupa/commits?path=index.html"))
     // console.log()
     setModifiedDate()
-    setTimeout(showLastUpdateTime, MINUTE * 1)
+    setTimeout(showLastUpdateTime, MINUTE * 5)
 }
 
 // showTime();
