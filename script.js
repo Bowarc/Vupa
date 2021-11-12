@@ -48,8 +48,10 @@ function timeSince(date) {
     if (interval > 1) {
         return add_pluriel(Math.floor(interval), "minute")
     }
-    // return "Less than 1 minute ago"
-    return add_pluriel(Math.floor(interval), "second")
+    interval = seconds
+    if (interval > 0) {
+        return add_pluriel(Math.floor(interval), "second")
+    }
 }
 
 
@@ -105,4 +107,4 @@ function showLastUpdateTime(){
 
 // showTime();
 showLastUpdateTime();
-getModifiedDate();
+// getModifiedDate();
