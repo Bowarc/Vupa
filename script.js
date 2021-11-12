@@ -5,7 +5,8 @@ const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 
-var last_commit_date = getModifiedDate();
+var last_commit_date;
+getModifiedDate();
 var last_commit_date_check = new Date();
 
 //Finish this
