@@ -68,7 +68,7 @@ function getModifiedDate() {
         })
         .then((message) => {
             if (message == 403){
-                console.log("We are banned from the git API KEKW")
+                console.log("We are still banned from the git API KEKW")
             }else{
                 last_commit_date = message[0]['commit']['committer']['date'];
             }            
