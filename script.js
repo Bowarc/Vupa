@@ -89,7 +89,7 @@ function showLastUpdateTime(StartupTime){
     }
     document.getElementById("MyClockDisplay").innerText = timeSince(Date.parse(last_commit_date));
     document.getElementById("MyClockDisplay").textContent = timeSince(Date.parse(last_commit_date));
-    setTimeout(showLastUpdateTime, 0)
+    setTimeout(showLastUpdateTime, SECOND)
 }
 
 // showTime();
