@@ -86,8 +86,8 @@ function showLastUpdateTime(StartupTime){
     // console.log(fetch("https://api.github.com/repos/bowarc/Vupa/commits?path=index.html"))
     // console.log()
     setModifiedDate()
-    setTimeout(showLastUpdateTime, MINUTE * 30)
+    setTimeout(showLastUpdateTime, MINUTE * 1)
 }
 
 // showTime();
-// showLastUpdateTime(performance.now());
+showLastUpdateTime(performance.now());
