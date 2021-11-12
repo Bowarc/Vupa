@@ -22,6 +22,7 @@ function timeSince(date) {
         if (n > 1){
             sentense +=  "s";
         }
+        sentense += " ago"
         return sentense
     }
 
@@ -59,18 +60,18 @@ function getModifiedDate() {
     fetch("https://api.github.com/repos/bowarc/Vupa/commits?")
         .then((response) => {
             last_commit_date_check_status = response.status;
-            return (response.status, response.json());
+            return response.json();
         })
-        .then((status, commits) => {
-            if (status == 200){
+        .then((commits) => {
+            if (last_commit_date_check_status == 200){
                 last_commit_date = commits[0]['commit']['committer']['date'];
             }else{
                 console.log("If you see a 203 message, don't worry it's probably me being temp banned when testing things with github's api")
-                // console.log(status)
+                // console.log(last_commit_date_check_status)
             }            
         });
     }
-    setTimeout(getModifiedDate, MINUTE * 5)
+    // setTimeout(getModifiedDate, MINUTE * 5)
 }
 function showTime(){
     // https://codepen.io/afarrar/pen/JRaEjP
@@ -96,10 +97,10 @@ function showLastUpdateTime(){
     let message;
 
     if (last_commit_date_check_status == 200){
-        mesasge = timeSince(Date.parse(last_commit_date))
+        message = timeSince(Date.parse(last_commit_date))
     }else{
         console.log("Unable to find the time since the last update code: ", last_commit_date_check_status)
-        message = " "
+        message = ""
     }
     document.getElementById("MyClockDisplay").innerText = message;
     document.getElementById("MyClockDisplay").textContent = message;
