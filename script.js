@@ -64,7 +64,7 @@ function getModifiedDate() {
         })
         .then((commits) => {
             if (last_commit_date_check_status == 200){
-                // last_commit_date = commits[0]['commit']['committer']['date'];
+                last_commit_date = commits[0]['commit']['committer']['date'];
             }else{
                 console.log("If you see a 203 message, don't worry it's probably me being temp banned when testing things with github's api")
                 // console.log(last_commit_date_check_status)
