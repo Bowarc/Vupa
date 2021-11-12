@@ -1,38 +1,64 @@
 console.log("GET THE FUCK OUT OF THE CONSOLE :)");
+
+const SECOND = 1;
+const MINUTE = SECOND * 60;
+const HOUR = MINUTE * 60;
+const DAY = HOUR * 24;
+
 let a = 0;
 
 function sleep(sleepDuration){
     var now = new Date().getTime();
     while(new Date().getTime() < now + sleepDuration){ /* Do nothing */ }
 }
-console.log("This is a test 1");
-// sleep(1000);
-console.log("This is a test 2");
-// while (true) {
-//     console.log(a);
-//     a = a + 1;
-//     if (a > 100) {
-//         break;
-//     }
-// }
-function setModifiedDate() {
-    let a;
-    if (document.getElementById('MyClockDisplay')) {
 
+function timeSince(date) {
+    function add_pluriel(n, time){
+        sentense = n + " " + time
+        if (n > 1){
+            sentense = sentense + "s"
+        }
+        return sentense
+    }
+
+    var seconds = Math.floor((new Date() - date) / 1000);
+
+    var interval = seconds / 31536000;
+    if (interval > 1) {
+        return add_pluriel(Math.floor(interval), "year")
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+        return add_pluriel(Math.floor(interval), "month")
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+        return add_pluriel(Math.floor(interval), "days")
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+        return add_pluriel(Math.floor(interval), "hour")
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+        return add_pluriel(Math.floor(interval), "minute")
+    }
+    return add_pluriel(Math.floor(interval), "second")
+}
+
+function setModifiedDate() {
+    if (document.getElementById('MyClockDisplay')) {
     fetch("https://api.github.com/repos/bowarc/Vupa/commits?")
         .then((response) => {
-            // a = response.json();
             return response.json();
         })
         .then((commits) => {
-            var modified = commits[0]['commit']['committer']['date'].slice(11, 19);
-            a = modified
-            // return modified
-            document.getElementById("MyClockDisplay").innerText = modified;
-            document.getElementById("MyClockDisplay").textContent = modified;
+            var modified = commits[0]['commit']['committer']['date']
+
+            document.getElementById("MyClockDisplay").innerText = timeSince(Date.parse(modified));
+            document.getElementById("MyClockDisplay").textContent = timeSince(Date.parse(modified));
         });
     }
-    return a
 }
 
 function showTime(){
@@ -53,12 +79,14 @@ function showTime(){
     
     setTimeout(showTime, 1000);    
 }
-// showTime();
+
 
 function showLastUpdateTime(StartupTime){
     // console.log(fetch("https://api.github.com/repos/bowarc/Vupa/commits?path=index.html"))
-    console.log(setModifiedDate())
-    setTimeout(showLastUpdateTime, 60000)
+    // console.log()
+    setModifiedDate()
+    setTimeout(showLastUpdateTime, MINUTE * 1)
 }
 
+// showTime();
 showLastUpdateTime(performance.now());
