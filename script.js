@@ -5,8 +5,10 @@ const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 
-let a = 0;
+var last_commit_date = getModifiedDate();
+var last_commit_date_check = new Date();
 
+//Finish this
 function sleep(sleepDuration){
     var now = new Date().getTime();
     while(new Date().getTime() < now + sleepDuration){ /* Do nothing */ }
@@ -14,9 +16,9 @@ function sleep(sleepDuration){
 
 function timeSince(date) {
     function add_pluriel(n, time){
-        sentense = n + " " + time
+        sentense = n + " " + time;
         if (n > 1){
-            sentense = sentense + "s"
+            sentense +=  "s";
         }
         return sentense
     }
@@ -43,21 +45,18 @@ function timeSince(date) {
     if (interval > 1) {
         return add_pluriel(Math.floor(interval), "minute")
     }
-    return "Less than 5 minute ago"
-    // return add_pluriel(Math.floor(interval), "second")
+    // return "Less than 1 minute ago"
+    return add_pluriel(Math.floor(interval), "second")
 }
 
-function setModifiedDate() {
+function getModifiedDate() {
     if (document.getElementById('MyClockDisplay')) {
         fetch("https://api.github.com/repos/bowarc/Vupa/commits?")
             .then((response) => {
                 return response.json();
             })
             .then((commits) => {
-                var modified = commits[0]['commit']['committer']['date']
-
-                document.getElementById("MyClockDisplay").innerText = timeSince(Date.parse(modified));
-                document.getElementById("MyClockDisplay").textContent = timeSince(Date.parse(modified));
+                last_commit_date = commits[0]['commit']['committer']['date']
         }   );
     }
 }
@@ -85,8 +84,12 @@ function showTime(){
 function showLastUpdateTime(StartupTime){
     // console.log(fetch("https://api.github.com/repos/bowarc/Vupa/commits?path=index.html"))
     // console.log()
-    setModifiedDate()
-    setTimeout(showLastUpdateTime, MINUTE * 5)
+    if (new Date() - last_commit_date_check > MINUTE * 10){
+        getModifiedDate()
+    }
+    document.getElementById("MyClockDisplay").innerText = timeSince(Date.parse(last_commit_date));
+    document.getElementById("MyClockDisplay").textContent = timeSince(Date.parse(last_commit_date));
+    setTimeout(showLastUpdateTime, 0)
 }
 
 // showTime();
