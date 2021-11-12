@@ -49,16 +49,16 @@ function timeSince(date) {
 
 function setModifiedDate() {
     if (document.getElementById('MyClockDisplay')) {
-    fetch("https://api.github.com/repos/bowarc/Vupa/commits?")
-        .then((response) => {
-            return response.json();
-        })
-        .then((commits) => {
-            var modified = commits[0]['commit']['committer']['date']
+        fetch("https://api.github.com/repos/bowarc/Vupa/commits?")
+            .then((response) => {
+                return response.json();
+            })
+            .then((commits) => {
+                var modified = commits[0]['commit']['committer']['date']
 
-            document.getElementById("MyClockDisplay").innerText = timeSince(Date.parse(modified));
-            document.getElementById("MyClockDisplay").textContent = timeSince(Date.parse(modified));
-        });
+                document.getElementById("MyClockDisplay").innerText = timeSince(Date.parse(modified));
+                document.getElementById("MyClockDisplay").textContent = timeSince(Date.parse(modified));
+        }   );
     }
 }
 
@@ -86,8 +86,8 @@ function showLastUpdateTime(StartupTime){
     // console.log(fetch("https://api.github.com/repos/bowarc/Vupa/commits?path=index.html"))
     // console.log()
     setModifiedDate()
-    setTimeout(showLastUpdateTime, SECOND * 1)
+    setTimeout(showLastUpdateTime, MINUTE * 30)
 }
 
 // showTime();
-showLastUpdateTime(performance.now());
+// showLastUpdateTime(performance.now());
