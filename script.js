@@ -1,6 +1,7 @@
 console.log("GET THE FUCK OUT OF THE CONSOLE :)");
 
-const SECOND = 1;
+const MILLI = 1
+const SECOND = MILLI * 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
@@ -15,6 +16,9 @@ function sleep(sleepDuration){
     while(new Date().getTime() < now + sleepDuration){ /* Do nothing */ }
 }
 
+function readFile(file){
+    return JSON.parse(file)
+}
 function timeSince(date) {
     function add_pluriel(n, time){
         sentense = n + " " + time;
@@ -85,6 +89,7 @@ function showTime(){
 function showLastUpdateTime(StartupTime){
     // console.log(fetch("https://api.github.com/repos/bowarc/Vupa/commits?path=index.html"))
     // console.log()
+    // console.log(readFile(data))
     if (new Date() - last_commit_date_check > MINUTE * 10){
         getModifiedDate()
     }
@@ -95,3 +100,4 @@ function showLastUpdateTime(StartupTime){
 
 // showTime();
 showLastUpdateTime(performance.now());
+setTimeout(getModifiedDate(), SECOND)
