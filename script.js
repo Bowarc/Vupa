@@ -17,7 +17,7 @@ function readFile(file){
     return JSON.parse(file)
 }
 function timeSince(date) {
-    function add_pluriel(n, time){
+    function generate_output(n, time){
         sentense = "Updated " + n + " " + time;
         if (n > 1){
             sentense +=  "s";
@@ -30,27 +30,27 @@ function timeSince(date) {
 
     var interval = seconds / 31536000;
     if (interval > 1) {
-        return add_pluriel(Math.floor(interval), "year")
+        return generate_output(Math.floor(interval), "year")
     }
     interval = seconds / 2592000;
     if (interval > 1) {
-        return add_pluriel(Math.floor(interval), "month")
+        return generate_output(Math.floor(interval), "month")
     }
     interval = seconds / 86400;
     if (interval > 1) {
-        return add_pluriel(Math.floor(interval), "days")
+        return generate_output(Math.floor(interval), "days")
     }
     interval = seconds / 3600;
     if (interval > 1) {
-        return add_pluriel(Math.floor(interval), "hour")
+        return generate_output(Math.floor(interval), "hour")
     }
     interval = seconds / 60;
     if (interval > 1) {
-        return add_pluriel(Math.floor(interval), "minute")
+        return generate_output(Math.floor(interval), "minute")
     }
     interval = seconds
     if (interval > 0) {
-        return add_pluriel(Math.floor(interval), "second")
+        return generate_output(Math.floor(interval), "second")
     }
 }
 
