@@ -18,7 +18,7 @@ function readFile(file){
 }
 function timeSince(date) {
     function add_pluriel(n, time){
-        sentense = n + " " + time;
+        sentense = "Updated " + n + " " + time;
         if (n > 1){
             sentense +=  "s";
         }
