@@ -28,8 +28,7 @@ div[style*="title"]:hover{
     align-items: center;
     text-align: center;
     /*flex-direction: column;*/
-    /*background: #0013;*/
-    
+    /*background: #0013;*/  
 }
 
 @keyframes ChangeLoaderColor{
@@ -93,6 +92,7 @@ section h2{
         transform: scale(0);
     }
 }
+
 [style*="BottomPage"]{
     /*color:  blue;*/
     position: fixed;

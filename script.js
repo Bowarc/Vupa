@@ -15,6 +15,25 @@ console.log("This is a test 2");
 //         break;
 //     }
 // }
+function setModifiedDate() {
+    let a;
+    if (document.getElementById('MyClockDisplay')) {
+
+    fetch("https://api.github.com/repos/bowarc/Vupa/commits?")
+        .then((response) => {
+            // a = response.json();
+            return response.json();
+        })
+        .then((commits) => {
+            var modified = commits[0]['commit']['committer']['date'].slice(11, 19);
+            a = modified
+            // return modified
+            document.getElementById("MyClockDisplay").innerText = modified;
+            document.getElementById("MyClockDisplay").textContent = modified;
+        });
+    }
+    return a
+}
 
 function showTime(){
     // https://codepen.io/afarrar/pen/JRaEjP
@@ -34,34 +53,12 @@ function showTime(){
     
     setTimeout(showTime, 1000);    
 }
+// showTime();
 
-function AnimateTitle(phase1, phase2){
-    let wanted_title = "Awopa";
-    let text = wanted_title.slice(phase2,phase1);
-
-    let obj = document.getElementById("title");
-    if (text == ""){
-        text = "u"
-        console.log("yes")
-    }
-    let style = window.getComputedStyle(obj, null)
-    obj.textContent  = text;
-    console.log(style)
-    obj.style = style;
-    // document.getElementById("title").textContent = text;
-
-    if (phase1 > wanted_title.length - 1){
-        phase2 = phase2 + 1;
-        if (phase2 > wanted_title.length - 1){
-            phase1 = 0;
-            phase2 = 0;
-        }
-    }else{
-        phase1 = phase1 + 1;
-    }
-
-    setTimeout(AnimateTitle.bind(null, phase1, phase2), 500);
+function showLastUpdateTime(StartupTime){
+    // console.log(fetch("https://api.github.com/repos/bowarc/Vupa/commits?path=index.html"))
+    console.log(setModifiedDate())
+    setTimeout(showLastUpdateTime, 60000)
 }
 
-// AnimateTitle(0,0);
-showTime();
+showLastUpdateTime(performance.now());
