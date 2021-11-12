@@ -47,11 +47,9 @@ function timeSince(date) {
     interval = seconds / 60;
     if (interval > 1) {
         return generate_output(Math.floor(interval), "minute")
-    }
-    interval = seconds
-    if (interval > 0) {
-        return generate_output(Math.floor(interval), "second")
-    }
+    }    
+    return generate_output(Math.floor(seconds), "second")
+    
 }
 
 
@@ -73,6 +71,7 @@ function getModifiedDate() {
     }
     // setTimeout(getModifiedDate, MINUTE * 5)
 }
+
 function showTime(){
     // https://codepen.io/afarrar/pen/JRaEjP
     var date = new Date();
@@ -91,7 +90,6 @@ function showTime(){
     
     setTimeout(showTime, 1000);    
 }
-
 
 function showLastUpdateTime(){
     let message;
