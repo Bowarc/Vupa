@@ -1,14 +1,12 @@
 console.log("GET THE FUCK OUT OF THE CONSOLE :)");
 
-const MILLI = 1
+const MILLI = 1;
 const SECOND = MILLI * 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 
-var last_commit_date;
-getModifiedDate();
-var last_commit_date_check = new Date();
+var last_commit_date = new Date();
 
 //Finish this
 function sleep(sleepDuration){
@@ -54,18 +52,28 @@ function timeSince(date) {
     return add_pluriel(Math.floor(interval), "second")
 }
 
+
 function getModifiedDate() {
     if (document.getElementById('MyClockDisplay')) {
-        fetch("https://api.github.com/repos/bowarc/Vupa/commits?")
-            .then((response) => {
+    fetch("https://api.github.com/repos/bowarc/Vupa/commits?")
+        .then((response) => {
+            if (response.status  == 403 ){
+                // forbiden
+                return response.status
+            }else{
                 return response.json();
-            })
-            .then((commits) => {
-                last_commit_date = commits[0]['commit']['committer']['date']
-        }   );
+            }
+        })
+        .then((message) => {
+            if (message == 403){
+                console.log("We are banned from the git API KEKW")
+            }else{
+                last_commit_date = message[0]['commit']['committer']['date'];
+            }            
+        });
     }
+    // setTimeout(getModifiedDate, SECOND * 5)
 }
-
 function showTime(){
     // https://codepen.io/afarrar/pen/JRaEjP
     var date = new Date();
@@ -86,18 +94,15 @@ function showTime(){
 }
 
 
-function showLastUpdateTime(StartupTime){
+function showLastUpdateTime(){
     // console.log(fetch("https://api.github.com/repos/bowarc/Vupa/commits?path=index.html"))
     // console.log()
     // console.log(readFile(data))
-    if (new Date() - last_commit_date_check > MINUTE * 10){
-        getModifiedDate()
-    }
     document.getElementById("MyClockDisplay").innerText = timeSince(Date.parse(last_commit_date));
     document.getElementById("MyClockDisplay").textContent = timeSince(Date.parse(last_commit_date));
-    setTimeout(showLastUpdateTime, SECOND)
+    setTimeout(showLastUpdateTime, SECOND * 1)
 }
 
 // showTime();
-showLastUpdateTime(performance.now());
-setTimeout(getModifiedDate(), SECOND)
+showLastUpdateTime();
+getModifiedDate();
