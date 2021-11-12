@@ -4,7 +4,7 @@ const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 
-var last_commit_date;
+let last_commit_date;
 var last_commit_date_check_status = 0
 
 //Finish this
@@ -16,6 +16,7 @@ function sleep(sleepDuration){
 function readFile(file){
     return JSON.parse(file)
 }
+
 function timeSince(date) {
     function generate_output(n, time){
         sentense = "Updated " + n + " " + time;
@@ -48,8 +49,7 @@ function timeSince(date) {
     if (interval > 1) {
         return generate_output(Math.floor(interval), "minute")
     }    
-    return generate_output(Math.floor(seconds), "second")
-    
+    return generate_output(Math.floor(seconds), "second")  
 }
 
 
