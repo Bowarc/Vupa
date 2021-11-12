@@ -1,5 +1,3 @@
-console.log("GET THE FUCK OUT OF THE CONSOLE :)");
-
 const MILLI = 1;
 const SECOND = MILLI * 1000;
 const MINUTE = SECOND * 60;
@@ -7,6 +5,7 @@ const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 
 var last_commit_date = new Date();
+var last_commit_date_check_status = 0
 
 //Finish this
 function sleep(sleepDuration){
@@ -59,22 +58,19 @@ function getModifiedDate() {
     if (document.getElementById('MyClockDisplay')) {
     fetch("https://api.github.com/repos/bowarc/Vupa/commits?")
         .then((response) => {
-            if (response.status  == 403 ){
-                // forbiden
-                return response.status
-            }else{
-                return response.json();
-            }
+            last_commit_date_check_status = response.status;
+            return (response.status, response.json());
         })
-        .then((message) => {
-            if (message == 403){
-                console.log("We are still banned from the git API KEKW")
+        .then((status, commits) => {
+            if (status == 200){
+                last_commit_date = commits[0]['commit']['committer']['date'];
             }else{
-                last_commit_date = message[0]['commit']['committer']['date'];
+                console.log("If you see a 203 message, don't worry it's probably me being temp banned when testing things with github's api")
+                // console.log(status)
             }            
         });
     }
-    // setTimeout(getModifiedDate, SECOND * 5)
+    setTimeout(getModifiedDate, MINUTE * 5)
 }
 function showTime(){
     // https://codepen.io/afarrar/pen/JRaEjP
@@ -97,14 +93,19 @@ function showTime(){
 
 
 function showLastUpdateTime(){
-    // console.log(fetch("https://api.github.com/repos/bowarc/Vupa/commits?path=index.html"))
-    // console.log()
-    // console.log(readFile(data))
-    document.getElementById("MyClockDisplay").innerText = timeSince(Date.parse(last_commit_date));
-    document.getElementById("MyClockDisplay").textContent = timeSince(Date.parse(last_commit_date));
+    let message;
+
+    if (last_commit_date_check_status == 200){
+        mesasge = timeSince(Date.parse(last_commit_date))
+    }else{
+        console.log("Unable to find the time since the last update code: ", last_commit_date_check_status)
+        message = " "
+    }
+    document.getElementById("MyClockDisplay").innerText = message;
+    document.getElementById("MyClockDisplay").textContent = message;
     setTimeout(showLastUpdateTime, SECOND * 1)
 }
 
 // showTime();
 showLastUpdateTime();
-// getModifiedDate();
+getModifiedDate();
