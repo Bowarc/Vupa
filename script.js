@@ -39,7 +39,7 @@ function timeSince(date) {
     }
     interval = seconds / 86400;
     if (interval > 1) {
-        return generate_output(Math.floor(interval), "days")
+        return generate_output(Math.floor(interval), "day")
     }
     interval = seconds / 3600;
     if (interval > 1) {
@@ -106,5 +106,5 @@ function showLastUpdateTime(){
 }
 
 // showTime();
-showLastUpdateTime();
 getModifiedDate();
+showLastUpdateTime();
